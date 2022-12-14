@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export OMP_NUM_THREADS=16
-WORKLOAD_SIZE="low"
+export WORKLOAD_SIZE="low"
+export fdm-$WORKLOAD_SIZE.out
 
-./mdf < fdm-$WORKLOAD_SIZE.in > fdm-$WORKLOAD_SIZE.out
+./mdf < fdm-$WORKLOAD_SIZE.in > ./create_results.sh 
