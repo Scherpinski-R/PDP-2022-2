@@ -4,6 +4,7 @@
 #include <malloc.h>
 #include <string.h>
 #include <math.h>
+#include <omp.h>
 #define STABILITY 1.0f/sqrt(3.0f)
 
 
@@ -19,8 +20,14 @@ void mdf_heat(double ***  __restrict__ u0,
     register double alpha = deltaT / (deltaH * deltaH);
     register int continued = 1;
     register unsigned int steps = 0;
+
+
+    double start_time = omp_get_wtime();
     while (continued){
-      steps++;
+        steps++;
+
+        #pragma omp parallel
+        {
               for (unsigned int i = 0; i < npZ; i++){
                 for (unsigned int j = 0; j < npY; j++){
                   for (unsigned int k = 0; k < npX; k++){
@@ -56,31 +63,32 @@ void mdf_heat(double ***  __restrict__ u0,
                   }
                 }
               } 
+        }
+        double ***ptr = u0;
+        u0 = u1;
+        u1 = ptr;
               
-              double ***ptr = u0;
-              u0 = u1;
-              u1 = ptr;
-              
-              double err = 0.0f;
-              double maxErr = 0.0f;
-              for (unsigned int i = 0; i < npZ; i++){
-                for (unsigned int j = 0; j < npY; j++){
-                  for (unsigned int k = 0; k < npX; k++){
+        double err = 0.0f;
+        double maxErr = 0.0f;
+        for (unsigned int i = 0; i < npZ; i++){
+            for (unsigned int j = 0; j < npY; j++){
+                for (unsigned int k = 0; k < npX; k++){
                     err = fabs(u0[i][j][k] - boundaries);
                     if (err > inErr)
-                      maxErr = err;
+                        maxErr = err;
                     else
-                      continued = 0;
-                  }
+                        continued = 0;
                 }
-              }
+            }
+        }
       
     }
-  
-    fprintf(stdout, "%u\n", steps);
     
-                
+    double finish_time = omp_get_wtime();
+    fprintf(stdout, "%u\n", steps);
+    fprintf(stdout, "%f\n", finish_time - start_time); 
 }
+
 int main (int ac, char **av){
   double ***u0;
   double ***u1;
