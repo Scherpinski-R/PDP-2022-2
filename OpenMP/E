@@ -2,6 +2,6 @@
 
 export OMP_NUM_THREADS=16
 export WORKLOAD_SIZE="low"
-export fdm-$WORKLOAD_SIZE.out
+export FILENAME="fdm-$WORKLOAD_SIZE.out"
 
 ./mdf < fdm-$WORKLOAD_SIZE.in > ./create_results.sh 

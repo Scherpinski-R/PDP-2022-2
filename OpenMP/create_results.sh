@@ -1,7 +1,5 @@
 #!/bin/bash
 
-FILENAME="resultado.txt"
-
 read RESULT
 read TIME
 
