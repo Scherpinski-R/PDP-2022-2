@@ -27,7 +27,8 @@ void mdf_heat(double ***  __restrict__ u0,
         steps++;
 
         #pragma omp parallel
-        {
+        {   
+              #pragma omp for collapse(3)
               for (unsigned int i = 0; i < npZ; i++){
                 for (unsigned int j = 0; j < npY; j++){
                   for (unsigned int k = 0; k < npX; k++){
@@ -107,7 +108,6 @@ int main (int ac, char **av){
   unsigned int npX = (unsigned int) (sizeX / deltaH); //Number of points in X axis
   unsigned int npY = (unsigned int) (sizeY / deltaH);
   unsigned int npZ = (unsigned int) (sizeZ / deltaH);
-  
   
   //printf("p(%u, %u, %u)\n", npX, npY, npZ);
   //Allocing memory
