@@ -13,9 +13,6 @@ else
     echo "invalid workload"
 fi
 
-echo "a:" $RESULT
-echo "b:" $CORRECT_RESULT
-
 if [ "$RESULT" != "$CORRECT_RESULT" ]; then
     echo "Invalid Result, check for parallelism error." 
 else
