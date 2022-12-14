@@ -1,6 +1,6 @@
 EXEFILE   = mdf
 CPUCC     = gcc
-CPPFLAGS  = -std=c11 -m64 -O3
+CPPFLAGS  = -std=c11 -m64 -fopenmp -O3
 DEFS      =
 INCLUDES  =
 LIBDIR    =
