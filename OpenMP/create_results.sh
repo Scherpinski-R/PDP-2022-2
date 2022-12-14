@@ -16,5 +16,5 @@ fi
 if [ "$RESULT" != "$CORRECT_RESULT" ]; then
     echo "Invalid Result, check for parallelism error." 
 else
-    echo $RESULT >> $FILENAME 
+    echo $TIME >> $FILENAME 
 fi
