@@ -22,3 +22,7 @@ Em ordem, espero que os lacos mais internos tenham mais overhead:
 ## Teste com Numero de Threads Variavel 
 Definido anteriormente qual a abordagem adequada, realizar X execucoes,
 variando o numero de Threads a cada carga de trabalho fixa. 
+
+## Como Rodar um novo teste
+- se editou o codigo: make clean & make
+- apos alterar script E, setando Threads e Workload: ./helper
