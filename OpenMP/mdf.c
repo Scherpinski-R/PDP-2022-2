@@ -25,8 +25,7 @@ void mdf_heat(double ** * __restrict__ u0,
     while (continued) {
         steps++;
 
-        #pragma omp parallel
-        for collapse(3) schedule(static)
+        #pragma omp parallel for collapse(3) schedule(static)
         for (unsigned int i = 0; i < npZ; i++) {
             for (unsigned int j = 0; j < npY; j++) {
                 for (unsigned int k = 0; k < npX; k++) {
@@ -67,8 +66,7 @@ void mdf_heat(double ** * __restrict__ u0,
 
         double err = 0.0 f;
         double maxErr = 0.0 f;
-        #pragma omp parallel
-        for collapse(3) schedule(static)
+        #pragma omp parallel for collapse(3) schedule(static)
         for (unsigned int i = 0; i < npZ; i++) {
             for (unsigned int j = 0; j < npY; j++) {
                 for (unsigned int k = 0; k < npX; k++) {
